@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 function App() {
-  const [selectedTopic, setSelectedTopic] = useState("Please click a button");
+  const [selectedTopic, setSelectedTopic] = useState();
   const reactDescritions = ["Fundamental", "Crucial", "Core"];
 
   function genRandomInt(max) {
@@ -140,19 +140,37 @@ function App() {
           <h2>Examples</h2>
           <menu>
             <li onClick={() => handleClick("components")}>
-              <button>Components</button>
+              <button className={selectedTopic === "components" && "active"}>
+                Components
+              </button>
             </li>
             <li onClick={() => handleClick("jsx")}>
-              <button>JSX</button>
+              <button className={selectedTopic === "jsx" && "active"}>
+                JSX
+              </button>
             </li>
             <li onClick={() => handleClick("props")}>
-              <button>Props</button>
+              <button className={selectedTopic === "props" && "active"}>
+                Props
+              </button>
             </li>
             <li onClick={() => handleClick("state")}>
-              <button>State</button>
+              <button className={selectedTopic === "state" && "active"}>
+                State
+              </button>
             </li>
           </menu>
-          {selectedTopic}
+          {!selectedTopic ? (
+            "Please select a topic"
+          ) : (
+            <div id="tab-content">
+              <h3>{EXAMPLES[selectedTopic].title}</h3>
+              <p>{EXAMPLES[selectedTopic].description}</p>
+              <pre>
+                <code>{EXAMPLES[selectedTopic].code}</code>
+              </pre>
+            </div>
+          )}
         </section>
       </main>
     </div>
